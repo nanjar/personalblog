@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nanjar Budiman | AI Content Creator</title>
+
+    <meta name="description"
+        content="Nanjar Budiman - AI Content Creator, AI Music Producer, Cinematic Video Creator">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script type="application/ld+json">
+
+    {
+    "@context":"https://schema.org",
+    "@type":"Person",
+
+    "name":"Nanjar Budiman",
+
+    "jobTitle":"AI Content Creator",
+
+    "url":"https://nanjarbudiman.com",
+
+    "sameAs":[
+
+    "https://youtube.com/nanjar2000",
+    "https://instagram.com/nanjarbudiman",
+    "https://tiktok.com/@nanjarbudiman"
+
+    ]
+
+    }
+
+    </script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+
+            <div class="logo">
+                Nanjar Budiman
+            </div>
+
+            <div class="menu">
+
+                <a href="#about">About</a>
+                <a href="#video">Video</a>
+                <a href="#music">Music</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+            <div class="mobile-toggle">
+                ☰
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        
+        <video autoplay muted loop playsinline id="heroVideo">
+            <source src="assets/videos/hero.mp4" type="video/mp4">
+        </video>
+        <div id="hologram-container"></div>
+        <div id="particles"></div>
+        <div class="overlay"></div>
+        <!-- <div class="overlay"></div> -->
+
+        <div class="container hero-grid">
+
+            <div class="hero-content">
+
+                <h1>
+                    AI Content Creator,
+                    <span>AI Music</span>
+                    &
+                    <span>Cinematic Video</span>
+                </h1>
+
+                <p>
+                    Creating cinematic visuals, AI music, storytelling, and creative automation using Artificial Intelligence technology.
+                </p>
+
+                <a href="#video" class="btn">
+                    View Portfolio
+                </a>
+                <div class="floating-social">
+
+                    <a href="https://instagram.com/nanjarbudiman">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="https://tiktok.com/@nanjarbudiman">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+
+                    <a href="https://facebook.com/pamungkas.tea.7">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="hero-image">
+
+                <img src="assets/images/nanjar.png" alt="Nanjar Budiman">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+
+            <div class="about-grid">
+
+                <div>
+                    <img src="assets/images/about.jpg" alt="">
+                </div>
+
+                <div>
+
+                    <p>
+                        I am an AI Content Creator focusing on AI Music Production, AI Cinematic Video, YouTube Content Creation, and Generative Storytelling.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Combining human creativity and AI technology to produce professional-quality visual and audio works.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- VIDEO -->
+
+    <!-- <section id="video">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Video Portfolio</h2>
+            </div>
+
+            <div class="portfolio-grid">
+
+                <div class="card">
+
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
+
+                    <div class="card-content">
+                        <h3>Cyberpunk Future City</h3>
+                        <p>AI Cinematic Film</p>
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+
+                    <div class="card-content">
+                        <h3>Football Story</h3>
+                        <p>AI Sports Cinematic</p>
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+
+                    <div class="card-content">
+                        <h3>AI Music Video</h3>
+                        <p>Generative Visual Production</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section> -->
+    <section id="video">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Video Portfolio</h2>
+            </div>
+
+             
+
+            <div id="video-container" class="portfolio-grid">
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- MUSIC -->
+
+    <!-- <section id="music">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Music Portfolio</h2>
+            </div>
+
+            <div class="portfolio-grid">
+
+                <div class="card">
+
+                    <div class="card-content">
+
+                        <h3>Balada IT Engineer</h3>
+
+                        <audio controls>
+                            <source src="music/balada-it-engineer.mp3" type="audio/mpeg">
+                        </audio>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-content">
+
+                        <h3>Sebuah Kepastian</h3>
+
+                        <audio controls>
+                            <source src="music/sebuah-kepastian.mp3" type="audio/mpeg">
+                        </audio>
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-content">
+
+                        <h3>Tiada Daya</h3>
+
+                        <audio controls>
+                            <source src="music/tiada-daya.mp3" type="audio/mpeg">
+                        </audio>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section> -->
+    <section id="music">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Music Portfolio</h2>
+            </div>
+
+            <div id="music-container" class="portfolio-grid">
+            </div>
+
+        </div>
+
+    </section>
+    <!-- SERVICES -->
+
+    <section id="services">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Services</h2>
+            </div>
+
+            <div class="services-grid">
+
+                <div class="service-card">
+                    <h3>AI Music Production</h3>
+                </div>
+
+                <div class="service-card">
+                    <h3>AI Cinematic Video</h3>
+                </div>
+
+                <div class="service-card">
+                    <h3>YouTube Automation</h3>
+                </div>
+
+                <!-- <div class="service-card">
+                    <h3>AI Consulting</h3>
+                </div> -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Contact</h2>
+            </div>
+
+            <div class="contact-box">
+
+                <p>
+                    Let's create something amazing together.
+                </p>
+
+                <a href="#" id="contactBtn" class="btn">
+                    Contact Me
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 powered by chatGPT Prompt
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Dynamic Portfolio -->
+<script src="assets/js/render-videos.js"></script>
+<script src="assets/js/render-music.js"></script>
+
+<!-- Hologram -->
+<script src="assets/js/hologram.js"></script>
+
+<!-- Hero Animation -->
+<!-- <script src="js/hero-animation.js"></script> -->
+
+<!-- <script src="js/script.js"></script> -->
+ <div id="cinematicModal" class="cinematic-modal">
+
+    <div class="modal-overlay"></div>
+
+    <div class="modal-content">
+
+        <div class="scan-line"></div>
+
+        <h2>JUST FOR FUN</h2>
+
+        <p>
+            This portfolio website is created for creative exploration,
+            AI storytelling, and cinematic experiences.
+        </p>
+
+        <button id="closeModal">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+</body>
+
+</html>

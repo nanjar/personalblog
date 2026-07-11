@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membangun AI Automation dengan n8n | Nanjar Budiman</title>
+<meta name="description" content="Panduan lengkap membangun AI Automation menggunakan n8n, OpenAI, Gemini, AI Agent, dan RAG untuk kebutuhan bisnis modern.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.nanjarbudiman.com/blog/membangun-ai-automation-dengan-n8n/">
+
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.8}
+.container{max-width:1000px;margin:auto;padding:0 20px}
+header{padding:30px 0;border-bottom:1px solid #1f2937}
+.hero{
+height:70vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+url('/assets/images/blog/suno-ai.jpg')
+center center/cover;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:2rem;
+}
+h1,h2,h3{color:#fff}
+.badge{display:inline-block;padding:8px 16px;border-radius:999px;background:#0ea5e920;color:#67e8f9;margin-bottom:20px}
+.article{max-width:850px;margin:auto}
+.toc,.card{background:#111827;padding:24px;border-radius:16px;margin:24px 0}
+a{color:#67e8f9}
+pre{background:#111827;padding:16px;border-radius:10px;overflow:auto}
+footer{margin-top:60px;padding:30px;border-top:1px solid #1f2937;text-align:center}
+.home-btn{display:inline-block;background:#67e8f9;color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:bold}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Membangun AI Automation dengan n8n",
+ "author":{"@type":"Person","name":"Nanjar Budiman"},
+ "publisher":{"@type":"Organization","name":"Nanjar Budiman"},
+ "datePublished":"2026-06-12",
+ "dateModified":"2026-06-12"
+}
+</script>
+</head>
+<body>
+
+<header>
+<div class="container"><strong>Nanjar Budiman</strong></div>
+</header>
+
+<section class="hero">
+<span class="badge">AI Automation</span>
+<h1>Membangun AI Automation dengan n8n</h1>
+<p>Panduan lengkap dari workflow sederhana hingga AI Agent production-ready.</p>
+</section>
+
+<main class="container article">
+
+<div class="toc">
+<h2>Daftar Isi</h2>
+<ul>
+<li>Apa Itu AI Automation?</li>
+<li>Mengenal n8n</li>
+<li>Mengapa Memilih n8n?</li>
+<li>Instalasi n8n</li>
+<li>Membuat Workflow AI Pertama</li>
+<li>Integrasi OpenAI & Gemini</li>
+<li>RAG dan AI Agent</li>
+<li>Workflow Production</li>
+<li>Monitoring & Best Practice</li>
+<li>FAQ</li>
+</ul>
+</div>
+
+<h2>1. Apa Itu AI Automation?</h2>
+<p>AI Automation adalah kombinasi kecerdasan buatan dan workflow otomatis untuk menjalankan proses bisnis tanpa intervensi manusia secara terus-menerus.</p>
+
+<h2>2. Mengenal n8n</h2>
+<p>n8n adalah platform workflow automation open-source yang memungkinkan integrasi berbagai layanan seperti OpenAI, Gemini, WhatsApp, Telegram, PostgreSQL, WordPress, hingga Vector Database.</p>
+
+<h2>3. Mengapa Memilih n8n?</h2>
+<ul>
+<li>Open Source</li>
+<li>Self Hosted</li>
+<li>Mendukung AI Agent</li>
+<li>Mendukung RAG</li>
+<li>Biaya lebih rendah dibanding platform automation lain</li>
+</ul>
+
+<h2>4. Instalasi n8n</h2>
+<pre>docker run -it --rm -p 5678:5678 docker.n8n.io/n8nio/n8n</pre>
+
+<h2>5. Workflow AI Pertama</h2>
+<pre>
+Webhook
+↓
+OpenAI
+↓
+Response
+</pre>
+
+<p>Workflow ini dapat digunakan untuk chatbot, customer service, maupun AI assistant.</p>
+
+<h2>6. Integrasi OpenAI</h2>
+<pre>
+Anda adalah SEO Expert.
+Buat artikel 1000 kata tentang AI Automation.
+</pre>
+
+<h2>7. Integrasi Gemini</h2>
+<p>Gemini cocok untuk analisis dokumen panjang dengan biaya yang lebih ekonomis.</p>
+
+<h2>8. RAG dengan Vector Database</h2>
+<pre>
+PDF
+↓
+Embedding
+↓
+Qdrant
+↓
+AI Agent
+</pre>
+
+<p>Teknik ini memungkinkan AI menjawab berdasarkan dokumen perusahaan Anda.</p>
+
+<h2>9. AI Agent di n8n</h2>
+<pre>
+User
+↓
+AI Agent
+↓
+Tools
+↓
+Response
+</pre>
+
+<p>AI Agent dapat menggunakan database, email, kalender, dan berbagai tool lainnya secara otomatis.</p>
+
+<h2>10. Workflow Production</h2>
+
+<h3>AI Content Factory</h3>
+<pre>
+Keyword
+↓
+OpenAI
+↓
+Generate Article
+↓
+WordPress
+↓
+Publish
+</pre>
+
+<h3>Resume Analyzer</h3>
+<pre>
+Upload PDF
+↓
+Extract Text
+↓
+AI Analysis
+↓
+ATS Score
+</pre>
+
+<h3>XAUUSD Prediction</h3>
+<pre>
+Market Data
+↓
+Technical Analysis
+↓
+AI Evaluation
+↓
+Signal Generation
+</pre>
+
+<h2>11. Monitoring dan Error Handling</h2>
+<ul>
+<li>Error Trigger</li>
+<li>Logging ke Database</li>
+<li>Telegram Notification</li>
+<li>Email Alert</li>
+</ul>
+
+<h2>12. Best Practices</h2>
+<ul>
+<li>Gunakan Environment Variables</li>
+<li>Pisahkan workflow besar menjadi modular</li>
+<li>Aktifkan Queue Mode</li>
+<li>Simpan log dan backup workflow</li>
+<li>Gunakan Git untuk versioning</li>
+</ul>
+
+<div class="card">
+<h2>FAQ</h2>
+
+<h3>Apakah n8n gratis?</h3>
+<p>Ya, versi self-hosted dapat digunakan secara gratis.</p>
+
+<h3>Apakah bisa menggunakan OpenAI?</h3>
+<p>Ya, tersedia integrasi resmi OpenAI.</p>
+
+<h3>Apakah mendukung AI Agent?</h3>
+<p>Ya, n8n mendukung AI Agent dan LangChain.</p>
+
+<h3>Apakah cocok untuk bisnis?</h3>
+<p>Sangat cocok untuk otomatisasi proses bisnis modern.</p>
+</div>
+
+<center>
+<a href="/" class="home-btn">← Back to Home</a>
+</center>
+
+</main>
+
+<footer>
+© 2026 NanjarBudiman.com
+</footer>
+
+</body>
+</html>

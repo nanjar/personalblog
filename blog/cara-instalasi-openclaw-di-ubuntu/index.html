@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cara Instalasi OpenClaw di Ubuntu | Nanjar Budiman</title>
+<meta name="description" content="Panduan lengkap instalasi OpenClaw di Ubuntu untuk menjalankan AI assistant pribadi di server atau VPS.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.nanjarbudiman.com/blog/cara-instalasi-openclaw-di-ubuntu/">
+
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.8}
+.container{max-width:1000px;margin:auto;padding:0 20px}
+header{padding:30px 0;border-bottom:1px solid #1f2937}
+.hero{
+height:70vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+url('/assets/images/blog/openclaw-ubuntu-blog-cover.jpg')
+center center/cover;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:2rem;
+}
+h1,h2,h3{color:#fff}
+.badge{display:inline-block;padding:8px 16px;border-radius:999px;background:#0ea5e920;color:#67e8f9;margin-bottom:20px}
+.article{max-width:850px;margin:auto}
+.toc,.card{background:#111827;padding:24px;border-radius:16px;margin:24px 0}
+a{color:#67e8f9}
+pre{background:#111827;padding:16px;border-radius:10px;overflow:auto}
+code{color:#a5f3fc}
+footer{margin-top:60px;padding:30px;border-top:1px solid #1f2937;text-align:center}
+.home-btn{display:inline-block;background:#67e8f9;color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:bold}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Cara Instalasi OpenClaw di Ubuntu",
+ "author":{"@type":"Person","name":"Nanjar Budiman"},
+ "publisher":{"@type":"Organization","name":"Nanjar Budiman"},
+ "datePublished":"2026-07-07",
+ "dateModified":"2026-07-07",
+ "mainEntityOfPage":"https://www.nanjarbudiman.com/blog/cara-instalasi-openclaw-di-ubuntu/"
+}
+</script>
+</head>
+<body>
+
+<header>
+<div class="container"><strong>Nanjar Budiman</strong></div>
+</header>
+
+<section class="hero">
+<span class="badge">AI Assistant</span>
+<h1>Cara Instalasi OpenClaw di Ubuntu</h1>
+<p>Panduan praktis memasang OpenClaw di server Ubuntu untuk menjalankan AI assistant pribadi.</p>
+</section>
+
+<main class="container article">
+
+<div class="toc">
+<h2>Daftar Isi</h2>
+<ul>
+<li>Apa Itu OpenClaw?</li>
+<li>Kapan Cocok Dipasang di Ubuntu?</li>
+<li>Persiapan Server</li>
+<li>Install Node.js</li>
+<li>Install OpenClaw</li>
+<li>Menjalankan Onboarding</li>
+<li>Menjalankan Gateway sebagai Service</li>
+<li>Verifikasi Instalasi</li>
+<li>Menghubungkan Channel</li>
+<li>Troubleshooting</li>
+<li>FAQ</li>
+</ul>
+</div>
+
+<h2>1. Apa Itu OpenClaw?</h2>
+<p>OpenClaw adalah gateway AI assistant yang bisa berjalan di server pribadi. Dengan OpenClaw, kita bisa menghubungkan model AI, channel chat seperti Telegram atau Discord, workflow automation, tools server, dan memory workspace dalam satu sistem.</p>
+
+<p>Jika dipasang di Ubuntu server, OpenClaw bisa aktif terus sebagai background service sehingga AI assistant tetap bisa menerima pesan dan menjalankan tugas walaupun terminal SSH sudah ditutup.</p>
+
+<h2>2. Kapan Cocok Dipasang di Ubuntu?</h2>
+<p>Instalasi di Ubuntu cocok untuk Anda yang ingin menjalankan assistant pribadi secara mandiri di VPS, mini PC, home server, atau server kantor.</p>
+
+<ul>
+<li>Ingin AI assistant selalu online.</li>
+<li>Ingin menghubungkan Telegram, Discord, WhatsApp, atau channel lain.</li>
+<li>Ingin menyimpan workspace dan memory di server sendiri.</li>
+<li>Ingin menjalankan automation dengan akses ke file, Docker, web server, atau aplikasi lokal.</li>
+</ul>
+
+<h2>3. Persiapan Server</h2>
+<p>Contoh di artikel ini memakai Ubuntu 24.04 LTS. Untuk server kecil, RAM 1 GB masih bisa dipakai, tetapi lebih nyaman jika memakai 2 GB RAM atau menambahkan swap.</p>
+
+<pre>sudo apt update
+sudo apt upgrade -y
+sudo apt install -y curl ca-certificates gnupg</pre>
+
+<p>Disarankan menjalankan OpenClaw sebagai user non-root agar file konfigurasi tersimpan rapi di home user tersebut.</p>
+
+<pre>sudo adduser openclaw
+sudo usermod -aG sudo openclaw
+sudo loginctl enable-linger openclaw
+su - openclaw</pre>
+
+<h2>4. Install Node.js</h2>
+<p>OpenClaw membutuhkan Node.js modern. Node.js 24 direkomendasikan, sedangkan Node.js 22.19 ke atas juga masih didukung.</p>
+
+<pre>curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version
+npm --version</pre>
+
+<h2>5. Install OpenClaw</h2>
+<p>Setelah Node.js siap, jalankan installer OpenClaw.</p>
+
+<pre>curl -fsSL https://openclaw.ai/install.sh | bash</pre>
+
+<p>Pastikan perintah <code>openclaw</code> sudah tersedia.</p>
+
+<pre>openclaw --version</pre>
+
+<h2>6. Menjalankan Onboarding</h2>
+<p>Onboarding adalah proses awal untuk mengatur model AI, auth provider, gateway, channel, workspace, dan daemon service.</p>
+
+<pre>openclaw onboard --install-daemon</pre>
+
+<p>Ikuti wizard yang muncul. Biasanya Anda akan memilih provider model seperti OpenAI, Anthropic, Google, atau provider custom, lalu menyiapkan channel chat sesuai kebutuhan.</p>
+
+<div class="card">
+<h3>Catatan Keamanan</h3>
+<p>Simpan API key dan token channel dengan hati-hati. Jika server dipakai publik, jangan menaruh token di file yang bisa diakses dari web root seperti <code>/var/www/html</code>.</p>
+</div>
+
+<h2>7. Menjalankan Gateway sebagai Service</h2>
+<p>Jika onboarding memakai opsi <code>--install-daemon</code>, OpenClaw akan memasang systemd user service. Service ini membuat gateway tetap berjalan setelah logout dari SSH.</p>
+
+<pre>systemctl --user status openclaw-gateway.service</pre>
+
+<p>Untuk melihat log secara realtime:</p>
+
+<pre>journalctl --user -u openclaw-gateway.service -f</pre>
+
+<p>Jika ingin restart gateway:</p>
+
+<pre>openclaw gateway restart</pre>
+
+<h2>8. Verifikasi Instalasi</h2>
+<p>Setelah instalasi selesai, cek status OpenClaw dengan beberapa perintah berikut.</p>
+
+<pre>openclaw status
+openclaw gateway status
+openclaw doctor --non-interactive</pre>
+
+<p>Jika gateway berjalan di port default, health check lokal bisa dicek dengan:</p>
+
+<pre>curl -fsS http://127.0.0.1:18789/healthz
+curl -fsS http://127.0.0.1:18789/readyz</pre>
+
+<h2>9. Menghubungkan Channel</h2>
+<p>OpenClaw bisa dipakai langsung dari Control UI, tetapi biasanya lebih menarik jika dihubungkan ke channel chat seperti Telegram atau Discord.</p>
+
+<p>Untuk Telegram, buat bot melalui BotFather, ambil bot token, lalu hubungkan ke OpenClaw melalui wizard atau konfigurasi channel.</p>
+
+<pre>openclaw channels list
+openclaw channels add --channel telegram --token "&lt;BOT_TOKEN&gt;"</pre>
+
+<p>Sesuaikan command dengan versi CLI yang digunakan. Jika ragu, jalankan:</p>
+
+<pre>openclaw channels --help</pre>
+
+<h2>10. Tambahkan Swap untuk Server Kecil</h2>
+<p>Jika memakai VPS 1 GB RAM, tambahkan swap agar proses instalasi dan gateway lebih stabil.</p>
+
+<pre>sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab</pre>
+
+<h2>11. Troubleshooting</h2>
+
+<h3>Gateway tidak menyala</h3>
+<pre>openclaw doctor --non-interactive
+journalctl --user -u openclaw-gateway.service -n 80</pre>
+
+<h3>Port 18789 sudah dipakai</h3>
+<pre>sudo lsof -i :18789</pre>
+
+<p>Matikan proses yang bentrok atau ubah port gateway lewat konfigurasi OpenClaw.</p>
+
+<h3>Command openclaw tidak ditemukan</h3>
+<p>Pastikan terminal sudah memuat PATH dari installer. Logout-login SSH, atau cek lokasi binary:</p>
+
+<pre>which openclaw
+npm bin -g</pre>
+
+<h3>Server kehabisan memori</h3>
+<p>Tambahkan swap, gunakan model API-based, dan hindari menjalankan local LLM besar di VPS kecil.</p>
+
+<h2>12. Best Practice Setelah Instalasi</h2>
+<ul>
+<li>Gunakan user non-root khusus untuk OpenClaw.</li>
+<li>Aktifkan firewall dan batasi port publik.</li>
+<li>Simpan backup folder <code>~/.openclaw/</code>.</li>
+<li>Gunakan SSH tunnel, VPN, atau Tailscale untuk akses Control UI.</li>
+<li>Jangan commit API key atau bot token ke repository.</li>
+</ul>
+
+<div class="card">
+<h2>FAQ</h2>
+
+<h3>Apakah OpenClaw bisa dipasang di VPS murah?</h3>
+<p>Bisa. VPS 1 GB RAM dapat dipakai untuk gateway ringan, tetapi sebaiknya tambahkan swap atau gunakan VPS 2 GB RAM agar lebih nyaman.</p>
+
+<h3>Apakah harus memakai Docker?</h3>
+<p>Tidak. Instalasi langsung di Ubuntu cukup untuk banyak kebutuhan. Docker cocok jika ingin isolasi environment.</p>
+
+<h3>Apakah OpenClaw harus memakai OpenAI?</h3>
+<p>Tidak. OpenClaw dapat dikonfigurasi dengan beberapa provider model, termasuk provider API lain atau custom provider.</p>
+
+<h3>Di mana data OpenClaw disimpan?</h3>
+<p>Umumnya di folder <code>~/.openclaw/</code> milik user yang menjalankan OpenClaw. Workspace agent berada di <code>~/.openclaw/workspace/</code>.</p>
+</div>
+
+<center>
+<a href="/" class="home-btn">← Back to Home</a>
+</center>
+
+</main>
+
+<footer>
+&copy; 2026 NanjarBudiman.com
+</footer>
+
+</body>
+</html>

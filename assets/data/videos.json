@@ -1,0 +1,88 @@
+{
+  "videos": [
+    {
+      "title": "The AI Maverick",
+      "category": "Music Video",
+      "youtubeId": "wQUN3uDIeQk?si=LYN9ER7FtibUAIBV",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Cyberpunk Future City",
+      "category": "AI Video",
+      "youtubeId": "NseJYILni3w?si=agHWdf8CAL5Dftnu",
+      "thumbnail": "assets/images/video1.jpg",
+      "description": "AI Cinematic Film"
+    },
+    {
+      "title": "Crowded, but Alone",
+      "category": "Cinematic Video",
+      "youtubeId": "cKceicrAb6I?si=Ei-wP0CFDd51iQA2",
+      "thumbnail": "assets/images/video2.jpg",
+      "description": "Cinematic Video"
+    },
+    {
+      "title": "AI Music Video",
+      "category": "Music Video",
+      "youtubeId": "0_VC2DiuBko?si=_v5qquZ_YC6jQjgc",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Belum Saatnya Lelah",
+      "category": "Music Video",
+      "youtubeId": "Nmk2_PBU5J8?si=DFPZ_UodFnH_rHxv",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Unshaken",
+      "category": "Music Video",
+      "youtubeId": "ctj_n08na30?si=RwqKSMWksAJ2BGnE",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Sudahkah Mencintai Tulus",
+      "category": "Music Video",
+      "youtubeId": "DeD480Y9_E0?si=F-_SlgqwSZqnmcHJ",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "The Direction of Fate",
+      "category": "Music Video",
+      "youtubeId": "KrjvhmmMr3c?si=lIM16nX7OFjKgBSz",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Bakti Yang Terlupa",
+      "category": "Music Video",
+      "youtubeId": "bzl6l4PynZc?si=1ezKknwsIIRUNjG8",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "The Flower in The Window",
+      "category": "Music Video",
+      "youtubeId": "Cy0L3U72N90?si=GHQmOazQVQN4Ol5Y",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Bisikan Untuk Anakku",
+      "category": "Music Video",
+      "youtubeId": "mEhx4nO0t6A?si=1iezzTTw7XubJiJ1",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    },
+    {
+      "title": "Yaa Rohmaan Yaa Rohiim",
+      "category": "Music Video",
+      "youtubeId": "augTPEaDbq4?si=Mc_N7iS142H-Rsjk",
+      "thumbnail": "assets/images/video3.jpg",
+      "description": "Generative Visual Production"
+    }
+  ]
+}

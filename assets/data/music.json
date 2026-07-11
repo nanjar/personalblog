@@ -1,0 +1,45 @@
+{
+  "music": [
+    {
+      "title": "Super Hero Tanpa Sayap",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/kepastian.jpg",
+      "spotifyEmbed":"https://open.spotify.com/embed/album/68QaG3DzxpATp5dOoIp9vY"
+    },
+    {
+      "title": "Crowded, but alone",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/biarkan.jpg",
+      
+       "spotifyEmbed":"https://open.spotify.com/embed/album/6UBT9DRi2tFUOQcjBMmkyW"
+    },
+    {
+      "title": "Arafah",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/biarkan.jpg",
+      
+       "spotifyEmbed":"https://open.spotify.com/embed/album/10H2SGD4HkGgdkHChyXXER"
+    },
+    {
+      "title": "Biarkan Aku Pulang Lebih Dulu",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/biarkan.jpg",
+      
+       "spotifyEmbed":"https://open.spotify.com/embed/album/76koe7PZB0QdC1axcIgRh6"
+    },
+    {
+      "title": "Masa Putih Abu abu",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/kepastian.jpg",
+      "spotifyEmbed":"https://open.spotify.com/embed/album/234Fy8tOshXbs0tXG1JD51"
+    },
+    {
+      "title": "Tak Sempurna",
+      "artist": "Nanjar Budiman",
+      "cover": "assets/images/kepastian.jpg",
+      "spotifyEmbed":"https://open.spotify.com/embed/album/5A9iayWLh7Lxi41wf1Dv7k"
+    }
+    
+  ]
+}
+

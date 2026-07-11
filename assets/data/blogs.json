@@ -1,0 +1,39 @@
+[
+  {
+    "title":"Cara Instalasi OpenClaw di Ubuntu",
+    "slug":"cara-instalasi-openclaw-di-ubuntu",
+    "image":"assets/images/blog/openclaw-ubuntu-blog-cover.jpg",
+    "category":"AI Assistant",
+    "date":"July 2026",
+    "excerpt":"Panduan praktis memasang OpenClaw di server Ubuntu untuk menjalankan AI assistant pribadi.",
+    "url" : "/blog/cara-instalasi-openclaw-di-ubuntu/"
+  },
+  {
+    "title":"Cara Membuat Lagu AI dengan Suno AI dari Nol hingga Rilis ke Spotify",
+    "slug":"cara-membuat-lagu-ai-dengan-suno-ai",
+    "image":"assets/images/blog/suno-ai.jpg",
+    "category":"AI Music",
+    "date":"June 2026",
+    "excerpt":"Panduan lengkap membuat lagu AI...",
+    "url" : "/blog/cara-membuat-lagu-ai-suno-spotify/"
+  },
+  {
+    "title":"Workflow Membuat Film Cinematic dengan AI",
+    "slug":"workflow-membuat-film-cinematic-denganai",
+    "image":"assets/images/blog/cinematic-ai.jpg",
+    "category":"AI Video",
+    "date":"June 2026",
+    "excerpt":"Dari storyboard hingga video final menggunakan AI generatif.",
+    "url" : "/blog/workflow-membuat-film-cinematic-dengan-ai/"
+  },
+  {
+    "title":"Membangun AI Automation dengan n8n",
+    "slug":"membangun-ai-automation-dengan-n8n",
+    "image":"assets/images/blog/n8n.jpg",
+    "category":"Automation",
+    "date":"une 2026",
+    "excerpt":"Menghubungkan LLM, Telegram, Google Sheets dan API dalam satu workflow.",
+    "url" : "/blog/membangun-ai-automation-dengan-n8n/"
+  }
+    
+]
