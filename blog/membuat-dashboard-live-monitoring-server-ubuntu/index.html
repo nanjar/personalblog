@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membuat Dashboard Live Monitoring Server Ubuntu dengan Node.js & Apache | Nanjar Budiman</title>
+<meta name="description" content="Cara membangun dashboard monitoring server real-time — CPU, RAM, disk, jaringan, dan keamanan fail2ban — menggunakan Node.js dan Apache reverse proxy.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.nanjarbudiman.com/blog/membuat-dashboard-live-monitoring-server-ubuntu/">
+
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.8}
+.container{max-width:1000px;margin:auto;padding:0 20px}
+header{padding:30px 0;border-bottom:1px solid #1f2937}
+.hero{
+height:70vh;
+background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.85)),
+url('/assets/images/blog/server-watch-dashboard.jpg') center center/cover;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:2rem;
+}
+h1,h2,h3{color:#fff}
+.badge{display:inline-block;padding:8px 16px;border-radius:999px;background:#0ea5e920;color:#67e8f9;margin-bottom:20px}
+.article{max-width:850px;margin:auto}
+.toc,.card{background:#111827;padding:24px;border-radius:16px;margin:24px 0}
+a{color:#67e8f9}
+pre{background:#111827;padding:16px;border-radius:10px;overflow:auto}
+code{color:#a5f3fc}
+footer{margin-top:60px;padding:30px;border-top:1px solid #1f2937;text-align:center}
+.home-btn{display:inline-block;background:#67e8f9;color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:bold}
+.demo-btn{
+    display:inline-block;
+    margin-top:10px;
+    background:linear-gradient(90deg,#00d4ff,#7c3aed);
+    color:#fff;
+    padding:14px 32px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:bold;
+}
+.demo-box{
+    text-align:center;
+    background:#111827;
+    border:1px solid #1f2937;
+    padding:32px 24px;
+    border-radius:16px;
+    margin:30px 0;
+}
+.demo-box p{color:#94a3b8;margin-bottom:6px;}
+.stack-list{
+    margin:20px 0;
+    padding-left:25px;
+}
+.stack-list li{margin-bottom:12px;line-height:1.8;}
+.warn-card{
+    background:#1c1410;
+    border:1px solid #f59e0b40;
+    padding:20px 24px;
+    border-radius:14px;
+    margin:24px 0;
+}
+.warn-card h3{color:#fbbf24;margin-top:0;}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Membuat Dashboard Live Monitoring Server Ubuntu dengan Node.js & Apache",
+ "author":{"@type":"Person","name":"Nanjar Budiman"},
+ "publisher":{"@type":"Organization","name":"Nanjar Budiman"},
+ "datePublished":"2026-07-12",
+ "dateModified":"2026-07-12",
+ "mainEntityOfPage":"https://www.nanjarbudiman.com/blog/membuat-dashboard-live-monitoring-server-ubuntu/"
+}
+</script>
+</head>
+<body>
+
+<header>
+<div class="container"><strong>Nanjar Budiman</strong></div>
+</header>
+
+<section class="hero">
+<span class="badge">Server Monitoring</span>
+<h1>Membuat Dashboard Live Monitoring Server Ubuntu</h1>
+<p>Dari dashboard demo statis, jadi console real-time dengan Node.js dan Apache.</p>
+</section>
+
+<main class="container article">
+
+<div class="toc">
+<h2>Daftar Isi</h2>
+<ul>
+<li>Kenapa Perlu Dashboard Monitoring Sendiri?</li>
+<li>Arsitektur Singkat</li>
+<li>Agent: Membaca Metrics Asli dari Server</li>
+<li>Live Log Stream dengan Server-Sent Events</li>
+<li>Dashboard: UI dengan Mode Live & Demo Fallback</li>
+<li>Menjalankan Agent sebagai Service</li>
+<li>Reverse Proxy dengan Apache</li>
+<li>Mengamankan Endpoint Publik</li>
+<li>Demo Live</li>
+<li>FAQ</li>
+</ul>
+</div>
+
+<p>Setelah server OpenClaw saya berjalan cukup lama, saya sadar saya cuma cek kondisinya lewat SSH setiap kali "kepikiran" — tidak ideal. Jadi saya bikin dashboard monitoring sendiri: ringan, tanpa dependency berat, dan bisa diakses dari subdomain kapan saja.</p>
+
+<h2>1. Kenapa Perlu Dashboard Monitoring Sendiri?</h2>
+<p>Ada banyak tools monitoring siap pakai seperti Netdata atau Grafana, tapi untuk kebutuhan server pribadi skala kecil, saya lebih suka sesuatu yang:</p>
+<ul class="stack-list">
+    <li>Tidak butuh database atau agent berat terpisah</li>
+    <li>Bisa saya kontrol tampilannya sendiri, sesuai identitas visual situs</li>
+    <li>Cukup untuk memantau hal-hal penting: CPU, RAM, disk, jaringan, dan aktivitas mencurigakan dari fail2ban</li>
+</ul>
+<p>Solusinya: satu file Node.js kecil yang membaca data langsung dari sistem (<code>/proc</code>, <code>systemctl</code>, <code>fail2ban-client</code>), tanpa dependency eksternal.</p>
+
+<h2>2. Arsitektur Singkat</h2>
+<div class="card">
+<pre>Browser (dashboard)
+     │  fetch tiap 3 detik
+     ▼
+Apache reverse proxy (status.nanjarbudiman.com)
+     │
+     ▼
+Node.js agent (port 4000, localhost)
+     │
+     ▼
+/proc, df, systemctl, fail2ban-client, journalctl</pre>
+</div>
+<p>Agent menyajikan dua hal: file dashboard statis di <code>/</code>, dan endpoint JSON di <code>/api/metrics</code> plus live log stream di <code>/api/logs/stream</code>. Apache tinggal meneruskan trafik dari subdomain publik ke port lokal ini.</p>
+
+<h2>3. Agent: Membaca Metrics Asli dari Server</h2>
+<p>Beberapa metrik yang paling sering salah dihitung kalau asal pakai library adalah CPU usage dan free memory. Untuk CPU, saya ambil dua snapshot waktu idle/total dari <code>os.cpus()</code> dengan jeda singkat, lalu hitung selisihnya:</p>
+<pre>function getCpuUsage() {
+  return new Promise(resolve => {
+    const start = cpuSnapshot();
+    setTimeout(() => {
+      const end = cpuSnapshot();
+      const idleDiff = end.idle - start.idle;
+      const totalDiff = end.total - start.total;
+      resolve(100 - (100 * idleDiff / totalDiff));
+    }, 250);
+  });
+}</pre>
+<p>Untuk RAM, saya tidak pakai <code>os.freemem()</code> karena di Linux angka itu tidak memperhitungkan cache/buffer yang sebenarnya bisa dilepas. Lebih akurat baca <code>MemAvailable</code> langsung dari <code>/proc/meminfo</code>.</p>
+<p>Untuk disk dan status service, agent memanggil <code>df</code> dan <code>systemctl is-active</code> lewat <code>execSync</code>. Untuk IP yang diban, agent memanggil <code>fail2ban-client status sshd</code> dan parsing baris <code>Banned IP list</code>.</p>
+
+<div class="warn-card">
+<h3>Catatan permission</h3>
+<p><code>fail2ban-client</code> dan sebagian <code>journalctl</code> butuh privilege lebih tinggi. Kalau agent dijalankan bukan sebagai root, endpoint ini akan mengembalikan nilai kosong alih-alih error — dashboard menampilkan "N/A" daripada rusak.</p>
+</div>
+
+<h2>4. Live Log Stream dengan Server-Sent Events</h2>
+<p>Untuk log yang mengalir real-time seperti <code>journalctl -f</code>, saya pakai Server-Sent Events (SSE) daripada WebSocket — lebih sederhana untuk kasus satu arah seperti ini. Agent men-spawn proses <code>journalctl -f</code> per koneksi, lalu setiap baris baru langsung dikirim ke browser:</p>
+<pre>const tail = spawn('journalctl', ['-f','-n','0','-o','short-iso', ...units]);
+tail.stdout.on('data', chunk => {
+  chunk.toString().split('\n').filter(Boolean).forEach(line => {
+    res.write(`data: ${JSON.stringify(line)}\n\n`);
+  });
+});</pre>
+<p>Kalau browser tidak mendukung SSE atau koneksi terputus, dashboard otomatis jatuh ke polling biasa lewat endpoint <code>/api/logs</code>.</p>
+
+<h2>5. Dashboard: UI dengan Mode Live &amp; Demo Fallback</h2>
+<p>Hal yang saya anggap penting: dashboard tidak boleh terlihat "rusak" kalau agent sedang restart atau belum terpasang. Jadi ada dua mode:</p>
+<ul class="stack-list">
+    <li><strong>LIVE</strong> — data asli dari <code>/api/metrics</code>, badge hijau</li>
+    <li><strong>DEMO</strong> — kalau fetch gagal, dashboard otomatis pindah ke data simulasi dengan banner peringatan kuning, supaya tetap enak dilihat</li>
+</ul>
+<p>Statusnya juga reaktif — ring status di panel kiri berubah dari <strong>SECURE</strong> ke <strong>ELEVATED</strong> atau <strong>CRITICAL</strong> tergantung beban CPU/RAM dan jumlah failed login.</p>
+
+<h2>6. Menjalankan Agent sebagai Service</h2>
+<p>Supaya agent tetap hidup setelah SSH ditutup dan otomatis restart kalau crash, saya daftarkan sebagai systemd service:</p>
+<pre>sudo cp server-watch.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now server-watch
+sudo systemctl status server-watch</pre>
+
+<h2>7. Reverse Proxy dengan Apache</h2>
+<p>Karena server saya pakai Apache (bukan Nginx), konfigurasinya sedikit berbeda — terutama untuk endpoint SSE yang butuh buffering dimatikan supaya log tidak "macet" dulu sebelum sampai ke browser.</p>
+<pre>sudo a2enmod proxy proxy_http headers
+sudo cp apache-status.conf /etc/apache2/sites-available/status.nanjarbudiman.com.conf
+sudo a2ensite status.nanjarbudiman.com
+sudo apache2ctl configtest && sudo systemctl reload apache2
+sudo certbot --apache -d status.nanjarbudiman.com</pre>
+<p>Bagian pentingnya ada di blok <code>&lt;Location "/api/logs/stream"&gt;</code>, di mana <code>SetEnv no-gzip 1</code> dan <code>ProxyTimeout 3600</code> mencegah Apache memotong koneksi streaming sebelum waktunya.</p>
+
+<h2>8. Mengamankan Endpoint Publik</h2>
+<p>Karena dashboard ini akhirnya diakses lewat subdomain publik, dan menampilkan hostname, IP yang diban, serta jumlah percobaan login gagal, saya tidak mau membiarkannya benar-benar terbuka. Tiga opsi yang saya pakai bergantian:</p>
+<ul class="stack-list">
+    <li><strong>API key</strong> — set <code>STATUS_API_KEY</code> di environment variable service</li>
+    <li><strong>Basic auth di Apache</strong> — lewat <code>htpasswd</code>, paling simpel untuk dipasang</li>
+    <li><strong>Publik apa adanya</strong> — cocok kalau memang mau dijadikan status page terbuka seperti milik provider hosting</li>
+</ul>
+
+<h2>9. Demo Live</h2>
+<div class="demo-box">
+<p>Dashboard ini sudah aktif dan bisa dilihat langsung:</p>
+<a href="https://status.nanjarbudiman.com" target="_blank" rel="noopener" class="demo-btn">
+    Buka status.nanjarbudiman.com →
+</a>
+<p style="margin-top:14px;font-size:.85rem;">Kalau tampil badge <strong>DEMO</strong>, artinya agent sedang tidak terhubung — dashboard tetap menampilkan data simulasi agar halaman tidak kosong.</p>
+</div>
+
+<div class="card">
+<h2>FAQ</h2>
+
+<h3>Kenapa tidak pakai Grafana atau Netdata saja?</h3>
+<p>Tools tersebut bagus untuk monitoring skala lebih besar, tapi untuk satu server pribadi, agent Node.js kecil ini lebih ringan dan lebih mudah disesuaikan tampilannya dengan identitas visual situs.</p>
+
+<h3>Apakah data yang ditampilkan real-time?</h3>
+<p>Ya. Metrics di-polling setiap 3 detik, dan log stream mengalir langsung lewat Server-Sent Events tanpa jeda polling.</p>
+
+<h3>Apakah aman menjalankan agent sebagai root?</h3>
+<p>Untuk dashboard status pribadi, ini cukup umum karena beberapa command seperti <code>fail2ban-client</code> memang butuh privilege lebih tinggi. Alternatifnya, gunakan sudoers rule khusus untuk command tertentu saja.</p>
+
+<h3>Bisa dipasang untuk lebih dari satu server?</h3>
+<p>Bisa, dengan menjalankan satu agent per server lalu menambahkan pemilih server di dashboard. Versi saat ini fokus untuk satu server dulu.</p>
+</div>
+
+<center>
+<a href="/" class="home-btn">← Back to Home</a>
+</center>
+
+</main>
+
+<footer>
+&copy; 2026 NanjarBudiman.com
+</footer>
+
+</body>
+</html>

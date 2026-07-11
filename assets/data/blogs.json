@@ -1,5 +1,14 @@
 [
   {
+    "title":"Membuat Dashboard Live Monitoring Server Ubuntu dengan Node.js & Apache",
+    "slug":"membuat-dashboard-live-monitoring-server-ubuntu",
+    "image":"assets/images/blog/server-watch-dashboard.jpg",
+    "category":"Server Monitoring",
+    "date":"July 2026",
+    "excerpt":"Dari dashboard demo statis, jadi console real-time dengan Node.js dan Apache reverse proxy.",
+    "url" : "/blog/membuat-dashboard-live-monitoring-server-ubuntu/"
+  },
+  {
     "title":"Cara Instalasi LLM di Server Spek Kecil dan Memilih Model yang Tepat",
     "slug":"cara-instalasi-llm-server-spek-kecil",
     "image":"assets/images/blog/llm-server-spek-kecil.jpg",
