@@ -1,6 +1,15 @@
 {
   "videos": [
     {
+    "title":"Cara Setting Google Spreadsheet dan Mengambil Sheet ID",
+    "slug":"cara-setting-google-spreadsheet-dan-mengambil-sheet-id",
+    "image":"assets/images/blog/google-sheets-setup.jpg",
+    "category":"Automation",
+    "date":"July 2026",
+    "excerpt":"Panduan membuat Google Spreadsheet, mengatur akses sharing, dan cara mengambil Sheet ID serta GID untuk kebutuhan automation seperti n8n.",
+    "url" : "/blog/cara-setting-google-spreadsheet-dan-mengambil-sheet-id/"
+  },
+    {
       "title": "The AI Maverick",
       "category": "Music Video",
       "youtubeId": "wQUN3uDIeQk?si=LYN9ER7FtibUAIBV",

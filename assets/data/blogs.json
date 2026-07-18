@@ -1,10 +1,19 @@
 [
   {
+  "title":"Mengenal Dasar-Dasar Generative AI",
+  "slug":"mengenal-dasar-generative-ai",
+  "image":"assets/images/blog/generative-ai-basics.jpg",
+  "category":"AI Fundamentals",
+  "date":"12 July 2026",
+  "excerpt":"Pahami LLM, token, context window, inference, embeddings, dan hallucination sebagai fondasi setiap aplikasi AI.",
+  "url" : "/blog/mengenal-dasar-generative-ai/"
+},
+  {
     "title":"Membuat Dashboard Live Monitoring Server Ubuntu dengan Node.js & Apache",
     "slug":"membuat-dashboard-live-monitoring-server-ubuntu",
     "image":"assets/images/blog/server-watch-dashboard.jpg",
     "category":"Server Monitoring",
-    "date":"July 2026",
+    "date":"12 July 2026",
     "excerpt":"Dari dashboard demo statis, jadi console real-time dengan Node.js dan Apache reverse proxy.",
     "url" : "/blog/membuat-dashboard-live-monitoring-server-ubuntu/"
   },

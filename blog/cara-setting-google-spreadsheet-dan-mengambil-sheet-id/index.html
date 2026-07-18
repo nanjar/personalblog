@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cara Setting Google Spreadsheet dan Mengambil Sheet ID | Nanjar Budiman</title>
+<meta name="description" content="Panduan lengkap membuat dan setting Google Spreadsheet, cara mengambil Sheet ID dan GID, serta cara menghubungkannya ke automation seperti n8n.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.nanjarbudiman.com/blog/cara-setting-google-spreadsheet-dan-mengambil-sheet-id/">
+
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.8}
+.container{max-width:1000px;margin:auto;padding:0 20px}
+header{padding:30px 0;border-bottom:1px solid #1f2937}
+.hero{
+height:70vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+url('/assets/images/blog/google-sheets-setup.jpg')
+center center/cover;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:2rem;
+}
+h1,h2,h3{color:#fff}
+.badge{display:inline-block;padding:8px 16px;border-radius:999px;background:#0ea5e920;color:#67e8f9;margin-bottom:20px}
+.article{max-width:850px;margin:auto}
+.toc,.card{background:#111827;padding:24px;border-radius:16px;margin:24px 0}
+a{color:#67e8f9}
+pre{background:#111827;padding:16px;border-radius:10px;overflow:auto}
+code{color:#a5f3fc}
+footer{margin-top:60px;padding:30px;border-top:1px solid #1f2937;text-align:center}
+.home-btn{display:inline-block;background:#67e8f9;color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:bold}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Cara Setting Google Spreadsheet dan Mengambil Sheet ID",
+ "author":{"@type":"Person","name":"Nanjar Budiman"},
+ "publisher":{"@type":"Organization","name":"Nanjar Budiman"},
+ "datePublished":"2026-07-18",
+ "dateModified":"2026-07-18",
+ "mainEntityOfPage":"https://www.nanjarbudiman.com/blog/cara-setting-google-spreadsheet-dan-mengambil-sheet-id/"
+}
+</script>
+</head>
+<body>
+
+<header>
+<div class="container"><strong>Nanjar Budiman</strong></div>
+</header>
+
+<section class="hero">
+<span class="badge">Automation</span>
+<h1>Cara Setting Google Spreadsheet dan Mengambil Sheet ID</h1>
+<p>Panduan praktis membuat, mengatur akses, dan mengambil Sheet ID untuk kebutuhan automation.</p>
+</section>
+
+<main class="container article">
+
+<div class="toc">
+<h2>Daftar Isi</h2>
+<ul>
+<li>Kenapa Sheet ID Penting?</li>
+<li>Membuat Google Spreadsheet Baru</li>
+<li>Struktur URL Spreadsheet</li>
+<li>Cara Mengambil Sheet ID</li>
+<li>Cara Mengambil GID (ID Tab/Sheet)</li>
+<li>Setting Akses Sharing</li>
+<li>Menghubungkan ke Google Service Account</li>
+<li>Menggunakan Sheet ID di n8n</li>
+<li>Kesalahan Umum</li>
+<li>FAQ</li>
+</ul>
+</div>
+
+<p>Saat membangun automation dengan AI Agent, n8n, Google Apps Script, atau integrasi API lainnya, Anda hampir selalu membutuhkan satu informasi penting: <strong>Sheet ID</strong>. ID inilah yang dipakai sistem untuk mengenali spreadsheet mana yang harus dibaca atau ditulis. Artikel ini membahas cara membuat Google Spreadsheet, mengatur aksesnya, dan mengambil Sheet ID dengan benar.</p>
+
+<h2>1. Kenapa Sheet ID Penting?</h2>
+<p>Setiap Google Spreadsheet memiliki identitas unik berupa deretan karakter acak. Identitas ini dipakai oleh Google Sheets API, Apps Script, maupun tools automation seperti n8n untuk mengakses file yang tepat, tanpa harus mencari berdasarkan nama file yang bisa saja duplikat.</p>
+
+<h2>2. Membuat Google Spreadsheet Baru</h2>
+<p>Buka Google Drive, lalu pilih <strong>New → Google Sheets</strong>. Anda juga bisa langsung mengakses <code>sheets.new</code> di browser untuk membuat spreadsheet kosong secara instan.</p>
+<p>Beri nama file yang jelas, misalnya sesuai fungsinya seperti "Database Leads" atau "Log Automation", agar mudah dikenali saat dikelola dalam jumlah banyak.</p>
+
+<h2>3. Struktur URL Spreadsheet</h2>
+<p>Setiap kali membuka spreadsheet, perhatikan URL pada address bar browser. Polanya selalu sama:</p>
+
+<pre>https://docs.google.com/spreadsheets/d/SHEET_ID/edit#gid=GID</pre>
+
+<p>Ada dua bagian penting di sini:</p>
+<ul>
+<li><strong>SHEET_ID</strong> — identitas unik untuk keseluruhan file spreadsheet.</li>
+<li><strong>GID</strong> — identitas untuk tab/sheet tertentu di dalam file tersebut.</li>
+</ul>
+
+<div class="card">
+<h3>Contoh URL</h3>
+<pre>https://docs.google.com/spreadsheets/d/1AbCDeFGhijKLmnoPQRstuVWXyz1234567890abcd/edit#gid=987654321</pre>
+<p>Pada contoh di atas, bagian antara <code>/d/</code> dan <code>/edit</code> adalah Sheet ID, sedangkan angka setelah <code>gid=</code> adalah GID tab tersebut.</p>
+</div>
+
+<h2>4. Cara Mengambil Sheet ID</h2>
+<ol>
+<li>Buka spreadsheet yang ingin diambil ID-nya.</li>
+<li>Lihat URL di address bar.</li>
+<li>Salin teks yang berada di antara <code>/d/</code> dan <code>/edit</code>.</li>
+</ol>
+<p>Teks tersebut biasanya terdiri dari huruf, angka, tanda hubung, dan garis bawah, dengan panjang sekitar 44 karakter.</p>
+
+<h2>5. Cara Mengambil GID (ID Tab/Sheet)</h2>
+<p>Jika spreadsheet memiliki beberapa tab (misalnya "Sheet1", "Sheet2", "Rekap"), setiap tab punya GID sendiri.</p>
+<ol>
+<li>Klik tab sheet yang dituju di bagian bawah spreadsheet.</li>
+<li>Perhatikan URL, angka setelah <code>gid=</code> akan berubah sesuai tab yang aktif.</li>
+<li>Salin angka tersebut sebagai GID.</li>
+</ol>
+<p>GID <code>0</code> biasanya menunjuk ke tab pertama yang dibuat secara default.</p>
+
+<h2>6. Setting Akses Sharing</h2>
+<p>Agar spreadsheet bisa diakses oleh automation atau orang lain, atur permission melalui tombol <strong>Share</strong> di kanan atas.</p>
+<ul>
+<li><strong>Restricted</strong> — hanya orang yang diundang secara eksplisit yang bisa mengakses.</li>
+<li><strong>Anyone with the link (Viewer)</strong> — siapa saja dengan link bisa melihat, cocok untuk data publik non-sensitif.</li>
+<li><strong>Anyone with the link (Editor)</strong> — siapa saja dengan link bisa mengubah, sebaiknya dihindari untuk data penting.</li>
+</ul>
+<div class="card">
+<h3>Catatan Keamanan</h3>
+<p>Untuk automation yang menyimpan data sensitif seperti data pelanggan atau kredensial, gunakan akses <strong>Restricted</strong> dan tambahkan email Service Account secara spesifik, bukan opsi "Anyone with the link".</p>
+</div>
+
+<h2>7. Menghubungkan ke Google Service Account</h2>
+<p>Jika Sheet ID akan dipakai lewat Google Sheets API (misalnya dari n8n, Python, atau Apps Script eksternal), spreadsheet perlu dibagikan ke email Service Account.</p>
+<ol>
+<li>Buat project di Google Cloud Console, aktifkan Google Sheets API.</li>
+<li>Buat Service Account, lalu unduh file JSON credential-nya.</li>
+<li>Salin alamat email Service Account, formatnya mirip <code>nama-project@id-project.iam.gserviceaccount.com</code>.</li>
+<li>Buka Share pada spreadsheet, tempel email tersebut, lalu beri akses Editor jika perlu menulis data.</li>
+</ol>
+
+<h2>8. Menggunakan Sheet ID di n8n</h2>
+<p>Pada node Google Sheets di n8n, Anda tinggal menempelkan Sheet ID pada kolom Document ID, dan GID pada kolom Sheet Name/Sheet ID sesuai versi node yang dipakai.</p>
+<pre>Document ID: 1AbCDeFGhijKLmnoPQRstuVWXyz1234567890abcd
+Sheet: gid=987654321</pre>
+<p>Beberapa versi node n8n juga menerima URL spreadsheet secara langsung, sehingga Anda cukup paste seluruh link tanpa memisahkan ID dan GID secara manual.</p>
+
+<h2>9. Kesalahan Umum</h2>
+<ul>
+<li>Menyalin seluruh URL sebagai Sheet ID, padahal seharusnya hanya bagian di antara <code>/d/</code> dan <code>/edit</code>.</li>
+<li>Lupa membagikan spreadsheet ke email Service Account, sehingga API mengembalikan error permission.</li>
+<li>Salah menempelkan GID tab lama setelah tab dihapus atau diganti urutannya.</li>
+<li>Menggunakan akses Editor publik untuk data yang seharusnya bersifat privat.</li>
+</ul>
+
+<div class="card">
+<h2>FAQ</h2>
+
+<h3>Apakah Sheet ID bisa berubah?</h3>
+<p>Tidak. Sheet ID bersifat permanen selama file tidak dihapus, meskipun nama file atau isi datanya diubah.</p>
+
+<h3>Apakah satu spreadsheet bisa punya banyak GID?</h3>
+<p>Ya. Setiap tab/sheet di dalam satu file spreadsheet memiliki GID yang berbeda-beda.</p>
+
+<h3>Apakah Sheet ID sama dengan Folder ID di Google Drive?</h3>
+<p>Berbeda. Folder ID dipakai untuk mengidentifikasi folder di Google Drive, sedangkan Sheet ID khusus untuk file Google Spreadsheet.</p>
+
+<h3>Apakah aman membagikan Sheet ID?</h3>
+<p>Sheet ID saja tidak cukup untuk mengakses file jika permission sharing diatur dengan benar, namun tetap sebaiknya tidak dipublikasikan sembarangan bersamaan dengan akses Editor publik.</p>
+</div>
+
+<center>
+<a href="/" class="home-btn">← Back to Home</a>
+</center>
+
+</main>
+
+<footer>
+© 2026 NanjarBudiman.com
+</footer>
+
+</body>
+</html>

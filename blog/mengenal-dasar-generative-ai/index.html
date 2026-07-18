@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mengenal Dasar-Dasar Generative AI | Nanjar Budiman</title>
+<meta name="description" content="Panduan lengkap memahami dasar-dasar Generative AI: LLM, token, context window, hallucination, inference, dan embeddings sebagai fondasi setiap aplikasi AI modern.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://www.nanjarbudiman.com/blog/mengenal-dasar-generative-ai/">
+
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.8}
+.container{max-width:1000px;margin:auto;padding:0 20px}
+header{padding:30px 0;border-bottom:1px solid #1f2937}
+.hero{
+height:70vh;
+background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.85)),
+url('/assets/images/blog/generative-ai-basics.jpg') center center/cover;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:2rem;
+}
+h1,h2,h3{color:#fff}
+.badge{display:inline-block;padding:8px 16px;border-radius:999px;background:#0ea5e920;color:#67e8f9;margin-bottom:20px}
+.article{max-width:850px;margin:auto}
+.toc,.card{background:#111827;padding:24px;border-radius:16px;margin:24px 0}
+a{color:#67e8f9}
+pre{background:#111827;padding:16px;border-radius:10px;overflow:auto}
+code{color:#a5f3fc}
+footer{margin-top:60px;padding:30px;border-top:1px solid #1f2937;text-align:center}
+.home-btn{display:inline-block;background:#67e8f9;color:#000;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:bold}
+.question-list{margin:20px 0;padding-left:25px}
+.question-list li{margin-bottom:12px;line-height:1.8}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{padding:12px;border-bottom:1px solid #1f2937;text-align:left}
+th{color:#67e8f9}
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"Article",
+ "headline":"Mengenal Dasar-Dasar Generative AI",
+ "author":{"@type":"Person","name":"Nanjar Budiman"},
+ "publisher":{"@type":"Organization","name":"Nanjar Budiman"},
+ "datePublished":"2026-07-12",
+ "dateModified":"2026-07-12",
+ "mainEntityOfPage":"https://www.nanjarbudiman.com/blog/mengenal-dasar-generative-ai/"
+}
+</script>
+</head>
+<body>
+
+<header>
+<div class="container"><strong>Nanjar Budiman</strong></div>
+</header>
+
+<section class="hero container">
+<span class="badge">AI Fundamentals</span>
+<h1>Mengenal Dasar-Dasar Generative AI</h1>
+<p>Fondasi Wajib Sebelum Membangun Aplikasi AI</p>
+</section>
+
+<main class="container article">
+
+<div class="toc">
+<h2>Daftar Isi</h2>
+<ul>
+<li>Apa Itu Generative AI?</li>
+<li>Mengenal Large Language Model (LLM)</li>
+<li>Token: Unit Dasar yang Dipahami AI</li>
+<li>Context Window</li>
+<li>Inference: Proses AI Menghasilkan Jawaban</li>
+<li>Embeddings</li>
+<li>Hallucination pada AI</li>
+<li>Mengapa Fondasi Ini Penting?</li>
+<li>FAQ</li>
+</ul>
+</div>
+
+<p>Sebelum membangun chatbot, automation, atau aplikasi berbasis AI apa pun, ada baiknya memahami dulu cara kerja Generative AI dari akarnya. Banyak orang langsung terjun ke prompting atau membangun workflow tanpa mengerti apa yang sebenarnya terjadi di balik layar. Padahal, memahami konsep dasar ini akan membuat Anda jauh lebih efektif saat menulis prompt, mendesain sistem, maupun men-debug hasil yang tidak sesuai harapan.</p>
+
+<h2>1. Apa Itu Generative AI?</h2>
+<p>Generative AI adalah cabang kecerdasan buatan yang mampu menghasilkan konten baru, bukan sekadar mengklasifikasikan atau memprediksi data yang sudah ada. Konten yang dihasilkan bisa berupa teks, gambar, audio, video, maupun kode program.</p>
+<p>Berbeda dengan AI tradisional yang biasanya dilatih untuk satu tugas spesifik seperti deteksi spam atau prediksi harga, Generative AI dilatih pada data dalam jumlah sangat besar sehingga mampu mempelajari pola bahasa, struktur, dan konteks, lalu menggunakannya untuk menghasilkan output baru yang relevan.</p>
+
+<h2>2. Mengenal Large Language Model (LLM)</h2>
+<p>Large Language Model atau LLM adalah jenis model AI yang dilatih khusus untuk memahami dan menghasilkan bahasa manusia. Model ini dibangun di atas arsitektur neural network berjenis transformer, yang memungkinkan AI memperhatikan hubungan antar kata dalam sebuah kalimat, bahkan dalam teks yang panjang.</p>
+<p>Contoh LLM yang umum digunakan saat ini antara lain model dari keluarga GPT, Claude, Gemini, dan Llama. Masing-masing memiliki kekuatan berbeda tergantung ukuran model, data pelatihan, dan cara fine-tuning yang dilakukan.</p>
+
+<div class="card">
+<h3>Cara Sederhana Memahami LLM</h3>
+<p>Bayangkan LLM sebagai sistem yang sangat mahir menebak kata berikutnya berdasarkan konteks sebelumnya. Dari kemampuan menebak inilah muncul kemampuan menjawab pertanyaan, menulis artikel, hingga menulis kode.</p>
+</div>
+
+<h2>3. Token: Unit Dasar yang Dipahami AI</h2>
+<p>AI tidak membaca teks seperti manusia. Teks terlebih dahulu dipecah menjadi potongan kecil yang disebut token. Satu token bisa berupa satu kata, sebagian kata, atau bahkan satu tanda baca, tergantung metode tokenisasi yang digunakan.</p>
+<p>Sebagai gambaran kasar, satu kata dalam bahasa Indonesia sering terdiri dari satu hingga tiga token. Memahami konsep token penting karena:</p>
+<ul class="question-list">
+<li>Biaya penggunaan API biasanya dihitung berdasarkan jumlah token, bukan jumlah karakter.</li>
+<li>Batas panjang input dan output AI diukur dalam token.</li>
+<li>Prompt yang terlalu panjang bisa memotong konteks penting jika melebihi batas token.</li>
+</ul>
+
+<h2>4. Context Window</h2>
+<p>Context window adalah jumlah maksimum token yang bisa "diingat" oleh model dalam satu sesi percakapan atau satu kali proses, termasuk prompt, riwayat chat, dan dokumen yang disisipkan.</p>
+<p>Jika context window sudah penuh, informasi paling awal biasanya akan terpotong atau dilupakan oleh model. Inilah sebabnya percakapan yang sangat panjang terkadang membuat AI "lupa" instruksi di awal chat. Semakin besar context window suatu model, semakin banyak dokumen atau riwayat yang bisa diproses sekaligus.</p>
+
+<h2>5. Inference: Proses AI Menghasilkan Jawaban</h2>
+<p>Inference adalah proses ketika model yang sudah dilatih digunakan untuk menghasilkan output dari sebuah input. Secara sederhana, saat Anda mengirim prompt dan menerima jawaban, proses itulah yang disebut inference.</p>
+<p>Model menghasilkan jawaban secara token per token, memprediksi token berikutnya yang paling mungkin berdasarkan seluruh konteks yang tersedia, lalu mengulangi proses ini hingga jawaban selesai atau mencapai batas panjang tertentu.</p>
+
+<h2>6. Embeddings</h2>
+<p>Embeddings adalah representasi numerik dari teks, gambar, atau data lain dalam bentuk vektor multidimensi. Melalui embeddings, makna dan kemiripan antar data dapat dihitung secara matematis.</p>
+<p>Teknologi ini menjadi dasar dari berbagai fitur AI modern seperti pencarian semantik, sistem rekomendasi, dan Retrieval-Augmented Generation atau RAG, di mana AI mengambil potongan dokumen yang paling relevan berdasarkan kemiripan makna, bukan sekadar kecocokan kata kunci.</p>
+
+<div class="card">
+<h3>Contoh Penerapan Embeddings</h3>
+<p>Saat Anda mengunggah dokumen ke sebuah AI assistant lalu bertanya isinya, sistem biasanya mengubah dokumen tersebut menjadi embeddings, menyimpannya di vector database, lalu mengambil bagian paling relevan saat Anda bertanya sesuatu.</p>
+</div>
+
+<h2>7. Hallucination pada AI</h2>
+<p>Hallucination terjadi ketika AI menghasilkan informasi yang terdengar meyakinkan namun sebenarnya salah atau tidak berdasar fakta. Hal ini bisa terjadi karena model pada dasarnya bekerja dengan memprediksi kata yang paling mungkin, bukan mengambil fakta dari database yang terverifikasi.</p>
+<p>Beberapa cara umum untuk mengurangi risiko hallucination:</p>
+<ul class="question-list">
+<li>Memberikan konteks atau dokumen referensi yang jelas dalam prompt.</li>
+<li>Menggunakan teknik RAG agar jawaban didasarkan pada sumber data nyata.</li>
+<li>Meminta model menyertakan sumber atau alasan di balik jawabannya.</li>
+<li>Melakukan verifikasi manual untuk informasi yang bersifat krusial.</li>
+</ul>
+
+<h2>8. Mengapa Fondasi Ini Penting?</h2>
+<p>Setiap aplikasi AI modern, mulai dari chatbot customer service, automation di n8n, hingga tools content creation berbasis AI, dibangun di atas konsep-konsep dasar ini. Memahami token dan context window membantu Anda mendesain prompt yang efisien. Memahami embeddings membantu Anda membangun sistem pencarian atau RAG yang akurat. Memahami hallucination membantu Anda membangun sistem yang lebih bisa dipercaya.</p>
+<p>Dengan fondasi yang kuat, Anda tidak hanya menjadi pengguna AI yang pasif, tetapi juga mampu merancang workflow dan aplikasi AI yang lebih matang.</p>
+
+<div class="card">
+<h2>FAQ</h2>
+
+<h3>Apakah saya perlu belajar matematika untuk memahami Generative AI?</h3>
+<p>Tidak wajib. Memahami konsep dasar seperti token, context window, dan embeddings secara konseptual sudah cukup untuk mulai membangun aplikasi AI, tanpa perlu mendalami matematika di baliknya.</p>
+
+<h3>Apa perbedaan LLM dan Generative AI?</h3>
+<p>Generative AI adalah kategori luas yang mencakup teks, gambar, audio, dan video. LLM adalah salah satu jenis Generative AI yang secara khusus berfokus pada bahasa.</p>
+
+<h3>Apakah context window yang besar selalu lebih baik?</h3>
+<p>Tidak selalu. Context window besar berguna untuk dokumen panjang, tetapi model tetap perlu strategi yang baik agar tidak kehilangan fokus pada informasi penting di tengah teks yang sangat panjang.</p>
+
+<h3>Bagaimana cara memulai belajar Generative AI dari nol?</h3>
+<p>Mulailah dengan memahami konsep-konsep dasar di artikel ini, lalu praktikkan langsung dengan mencoba prompting sederhana, eksplorasi API, dan membangun proyek kecil menggunakan tools seperti n8n atau API dari provider AI.</p>
+</div>
+
+<center>
+<a href="/" class="home-btn">← Back to Home</a>
+</center>
+
+</main>
+
+<footer>
+© 2026 NanjarBudiman.com
+</footer>
+
+</body>
+</html>
